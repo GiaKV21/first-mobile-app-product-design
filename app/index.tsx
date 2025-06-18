@@ -1,15 +1,163 @@
-import { Text, View } from "react-native";
+import { Image } from "expo-image";
+import React from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
-export default function Index() {
+const blurhash =
+  "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+
+const GAMES = [
+  {
+    title: "Elden Ring",
+    studio: "FromSoftware",
+    rating: 9.8,
+    price: "FREE",
+    image: require("../assets/images/eldenring.jpg"),
+  },
+  {
+    title: "Dark Souls I",
+    studio: "FromSoftware",
+    rating: 9.5,
+    price: "$4.99",
+    image: require("../assets/images/darksoul1.jpg"),
+  },
+  {
+    title: "Dark Souls II",
+    studio: "FromSoftware",
+    rating: 9.9,
+    price: "FREE",
+    image: require("../assets/images/darksoul2.jpg"),
+  },
+  {
+    title: "Dark Souls III",
+    studio: "FromSoftware",
+    rating: 9.9,
+    price: "FREE",
+    image: require("../assets/images/darksoul3.jpg"),
+  },
+  {
+    title: "Nioh",
+    studio: "Team Ninja",
+    rating: 9.7,
+    price: "$9.99",
+    image: require("../assets/images/nioh.jpg"),
+  },
+];
+
+export default function App() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+    <ScrollView
+      style={styles.background}
+      contentContainerStyle={styles.contentContainer}
+      horizontal
+      showsHorizontalScrollIndicator={false}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+      {GAMES.map((game, index) => (
+        <TouchableOpacity key={index} style={styles.card}>
+          <Image
+            source={game.image}
+            style={styles.image}
+            placeholder={{ blurhash }}
+            contentFit="fill"
+            transition={800}
+          />
+          <View style={styles.titleRow}>
+            <Text style={styles.title} numberOfLines={1}>
+              {game.title}
+            </Text>
+            <Text style={styles.menuIcon}>⋮</Text>
+          </View>
+          <Text style={styles.studio}>{game.studio}</Text>
+          <View style={styles.detailsRow}>
+            <Text style={styles.rating}>{game.rating}</Text>
+            <Text style={styles.star}>★</Text>
+            <View style={styles.priceTag}>
+              <Text style={styles.priceText}>{game.price}</Text>
+            </View>
+          </View>
+        </TouchableOpacity>
+      ))}
+    </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    backgroundColor: "#F5F5F5",
+  },
+  contentContainer: {
+    paddingVertical: 60,
+    paddingHorizontal: 10,
+  },
+  card: {
+    width: 240,
+    height: 280,
+    marginHorizontal: 10,
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    padding: 10,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+  image: {
+    width: "100%",
+    height: 150,
+    borderRadius: 12,
+  },
+  titleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 8,
+  },
+  title: {
+    flex: 1,
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  menuIcon: {
+    fontSize: 22,
+    paddingHorizontal: 6,
+    color: "#444",
+  },
+  studio: {
+    fontSize: 11,
+    color: "#666",
+    marginVertical: 3,
+  },
+  detailsRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 2,
+  },
+  rating: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  star: {
+    fontSize: 14,
+    color: "#FFD700",
+    marginLeft: 4,
+  },
+  priceTag: {
+    marginLeft: "auto",
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+    borderRadius: 4,
+  },
+  priceText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "#388E3C",
+  },
+});
