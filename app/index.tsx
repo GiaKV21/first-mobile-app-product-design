@@ -77,12 +77,10 @@ export default function HomePage() {
 
   return (
     <SafeAreaView style={styles.wrapper} edges={["top", "left", "right"]}>
-      {/* Title */}
       <View style={styles.header}>
         <Text style={styles.title}>🎮 Game Store</Text>
       </View>
 
-      {/* Auth */}
       <View style={styles.authLinks}>
         <Text style={styles.authText} onPress={() => router.push("/login")}>
           Login
@@ -93,7 +91,6 @@ export default function HomePage() {
         </Text>
       </View>
 
-      {/* Search */}
       <TextInput
         style={styles.searchInput}
         placeholder="Search games..."
@@ -102,7 +99,6 @@ export default function HomePage() {
         onChangeText={setQuery}
       />
 
-      {/* Game Cards */}
       {filteredGames.length === 0 ? (
         <Text style={styles.emptyText}>No games found</Text>
       ) : (
@@ -138,7 +134,6 @@ export default function HomePage() {
         </ScrollView>
       )}
 
-      {/* Navbar with gesture-safe padding */}
       <View style={{ paddingBottom: insets.bottom || 12 }}>
         <Navbar variant="home" />
       </View>
